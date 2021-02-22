@@ -9,7 +9,7 @@ let datavoite=[];
 let datashowen=[];
 let dataName=[];
 let index ;
-let previousindex=[-1,-1,-1];
+let previousindex=[];
 let container =document.getElementById('container');
 let ulElDiv =document.getElementById('ulist');
 
@@ -47,17 +47,11 @@ function randomItem(){
     randomItem1=randomNum();
     randomItem2=randomNum();
     randomItem3=randomNum();
-    while(randomItem1===randomItem2||randomItem1===randomItem3||previousindex[0]===randomItem1||previousindex[1]===randomItem1 ||previousindex[2]===randomItem1)
-    {
-        randomItem1=randomNum();
-    }
-    while(randomItem2===randomItem1||randomItem2===randomItem3 ||previousindex[0]===randomItem2||previousindex[1]===randomItem2 ||previousindex[2]===randomItem2)
+    while(randomItem1===randomItem2||randomItem1===randomItem3||randomItem2===randomItem3||previousindex.includes(randomItem1)||previousindex.includes(randomItem2) ||previousindex.includes(randomItem3))
     {
         randomItem2=randomNum();
-    }
-    while(randomItem3===randomItem1||randomItem3===randomItem2 ||previousindex[0]===randomItem3||previousindex[1]===randomItem3 ||previousindex[2]===randomItem3)
-    {
         randomItem3=randomNum();
+        randomItem1=randomNum();
     }
     return [randomItem1,randomItem2,randomItem3];
 }
@@ -74,7 +68,7 @@ function runder (){
     arrayOfItems[index[0]].show++;
     arrayOfItems[index[1]].show++;
     arrayOfItems[index[2]].show++;    
-    console.log(`index1  :- ${index[0]} index2  :- ${index[1]} index3 :- ${index[2]} \npreviousindex1 :- ${previousindex[0]} previousindex2 : -  ${previousindex[1]} previousindex3 : - ${previousindex[2]} `)
+    console.log(`index1  = ${index[0]}\nindex2  = ${index[1]} \nindex3 = ${index[2]} \npreviousindex1 = ${previousindex[0]} \npreviousindex2 =  ${previousindex[1]} \npreviousindex3 = ${previousindex[2]} `)
     previousindex[0]=index[0];
     previousindex[1]=index[1];
     previousindex[2]=index[2];
@@ -105,37 +99,7 @@ function handleClicking(event){
             datavoite.push(arrayOfItems[i].votes);
             datashowen.push(arrayOfItems[i].show);        
         }
-
-
-
-
-
-
-
-
-        // let unorderdList = document.createElement('ul');
-        // container.appendChild(unorderdList);
-        // let li;
-        // for(let i = 0 ; i < arrayOfItems.length; i++){
-        //     datavoite.push(arrayOfItems[i].votes);
-        //     datashowen.push(arrayOfItems[i].show);
-        //     li = document.createElement('li');
-        //     unorderdList.appendChild(li);          
-        //     li.textContent = `${arrayOfItems[i].name} : it has | ${arrayOfItems[i].votes} Votes |${arrayOfItems[i].show} shown to user `;
-        // }
-
-
-        // Elimg1.removeEventListener('click', handleClicking);
-        // Elimg2.removeEventListener('click', handleClicking);
-        // Elimg3.removeEventListener('click', handleClicking);  
-        // for(let j = 0 ; j < arrayOfItems.length; j++){
-        //     console.log(`-------------------------${datavoite[j]}---------- ${datashowen[j]}  ------------ `);
-        
-        //     }
-        //     chartGo();
-    }
-
-    
+    }   
 }
 
 function myFunction(){
