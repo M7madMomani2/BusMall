@@ -6,6 +6,7 @@
 body {
     background-image: url("https://wallpapercave.com/wp/wp2655681.jpg");
     background-size: cover;
+    background-attachment: fixed;
     padding: 5%;
 }
 header {
@@ -41,25 +42,36 @@ h1{
 #container img{
     position: relative;
     margin-left: 20px;
-    border: 3px solid #000000;
+    border: 3px solid #2b0b1d;
     border-radius: 5%;
     width: 26vw;
     height: 50vh;
 
 
 }
-#container ul li {
+#ulist ul li {
   text-align: left;
-  margin-left: 4vw;
-  margin-right: 3vw;
+  margin-left: 1vw;
+  margin-right: 2vw;
   margin-top: 1%;
   padding: 10px;
   position: relative;
   background-color: rgba(0,0,0, 0.5);
   border: 3px solid #2b0b1d;
 }
-.isenguard{
-  display: block;
+#ulist ul {
+  margin-top: 5vh;
+  border: 3px solid #2b0b1d;
+  padding-bottom: 3vh;
 }
-
-.lotr{display:block;}
+#container button {
+  color: rgb(255 255 255);
+  margin-top: 1%;
+  padding: 3px;
+  font-size: large;
+  position: relative;
+  width: 149px;
+  height: 55px;
+  background-color: rgb(49 17 24);
+  border: 4px solid #ffffff;
+}
