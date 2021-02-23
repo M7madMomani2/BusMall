@@ -9,10 +9,10 @@ let datavoite=[];
 let datashowen=[];
 let dataName=[];
 let index ;
+let counterlode=0;
 let previousindex=[];
 let container =document.getElementById('container');
 let ulElDiv =document.getElementById('ulist');
-
 
 let Elimg1=document.createElement('img');
 Elimg1.setAttribute("id", "Elimg1");
@@ -93,16 +93,27 @@ function handleClicking(event){
         }
 
         runder();
-    }else{
+    }else{       
         container.appendChild(btEl);
-        for(let i = 0 ; i < arrayOfItems.length; i++){
-            datavoite.push(arrayOfItems[i].votes);
-            datashowen.push(arrayOfItems[i].show);        
+        if(counterlode==0){
+            for(let i = 0 ; i < arrayOfItems.length; i++){
+                datavoite.push(arrayOfItems[i].votes);
+                datashowen.push(arrayOfItems[i].show);        
+            }
+
         }
+        else{
+            for(let i = 0 ; i < arrayOfItems.length; i++){
+                datavoite[i]+=(arrayOfItems[i].votes);
+                datashowen[i]+=(arrayOfItems[i].show);        
+            }
+        }
+        
     }   
 }
 
 function myFunction(){
+    savedData();
     btEl.style.visibility = "hidden";
     document.getElementById("myChart").style.border = "3px solid #2b0b1d";
     chartGo();
@@ -112,14 +123,16 @@ function myFunction(){
     for(let i = 0 ; i < arrayOfItems.length; i++){
         li = document.createElement('li');
         unorderdList.appendChild(li);          
-        li.textContent = `${arrayOfItems[i].name} : it has | ${arrayOfItems[i].votes} Votes |${arrayOfItems[i].show} shown to user `;
+        li.textContent = `${arrayOfItems[i].name} : it has | ${datavoite[i]} Votes |${datashowen[i]} shown to user `;
     }
 
-
+if(attempts>=25){
     Elimg1.removeEventListener('click', handleClicking);
     Elimg2.removeEventListener('click', handleClicking);
-    Elimg3.removeEventListener('click', handleClicking);  
-
+    Elimg3.removeEventListener('click', handleClicking);
+    btEl.removeEventListener('click',myFunction)
+  
+}
 }
 
 function chartGo(){
@@ -150,6 +163,39 @@ var chart = new Chart(ctx, {
 });}
 
 
+function savedData(){
+    counterlode++;
+    let counterLode1 = JSON.stringify(counterlode);
+    localStorage.setItem('Clode', counterLode1);
+    let data = JSON.stringify(datashowen);
+    localStorage.setItem('Dshowen', data);
+    let data2 = JSON.stringify(datavoite);
+    localStorage.setItem('Dvoite', data2);
+    console.log("save done")
+
+
+  }
+  
+  function getData(){
+
+    let gettingData = localStorage.getItem('Dshowen');
+    let gettingData2 = localStorage.getItem('Dvoite');
+    let list1 = JSON.parse(gettingData);
+    let list2 = JSON.parse(gettingData2);
+
+
+
+    if(list1){
+      counterlode=JSON.parse(localStorage.getItem('Clode'));
+      datashowen = list1;
+      datavoite=list2;
+    //   myFunction();
+
+    }else{
+        datashowen = [];
+        datavoite=[];
+        }
+    }
 
 new MullItem('GOBLIN' , 'https://raw.githubusercontent.com/LTUC/amman-201d14/main/class-11/lab/assets/cthulhu.jpg' );
 new MullItem('BAG','https://raw.githubusercontent.com/LTUC/amman-201d14/main/class-11/lab/assets/bag.jpg' );
@@ -163,5 +209,6 @@ new MullItem('SCISSORS','https://raw.githubusercontent.com/LTUC/amman-201d14/mai
 new MullItem('USB','https://raw.githubusercontent.com/LTUC/amman-201d14/main/class-11/lab/assets/usb.gif' ); 
 new MullItem('WATER-CAN','https://raw.githubusercontent.com/LTUC/amman-201d14/main/class-11/lab/assets/water-can.jpg' ); 
 new MullItem('WINE-GLASS','https://raw.githubusercontent.com/LTUC/amman-201d14/main/class-11/lab/assets/wine-glass.jpg' ); 
-
+console.log(counterlode);
+getData();
 runder();
