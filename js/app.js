@@ -38,7 +38,6 @@ function MullItem(name , source)
     this.source=source;
     this.show=0;
     this.votes =0;
-    // this.flag=true;
     arrayOfItems.push(this);
     dataName.push(name);
 }
@@ -138,10 +137,7 @@ if(attempts>=25){
 function chartGo(){
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
-    // The type of chart we want to create
     type: 'line',
-
-    // The data for our dataset
     data: {
         labels: dataName,
         datasets: [{
@@ -158,7 +154,6 @@ var chart = new Chart(ctx, {
         }]
     },
 
-    // Configuration options go here
     options: {}
 });}
 
@@ -175,22 +170,18 @@ function savedData(){
 
 
   }
-  
+  function clearLocalStorage(){
+    localStorage.clear();
+}
   function getData(){
-
     let gettingData = localStorage.getItem('Dshowen');
     let gettingData2 = localStorage.getItem('Dvoite');
     let list1 = JSON.parse(gettingData);
     let list2 = JSON.parse(gettingData2);
-
-
-
     if(list1){
       counterlode=JSON.parse(localStorage.getItem('Clode'));
       datashowen = list1;
       datavoite=list2;
-    //   myFunction();
-
     }else{
         datashowen = [];
         datavoite=[];
@@ -209,6 +200,6 @@ new MullItem('SCISSORS','https://raw.githubusercontent.com/LTUC/amman-201d14/mai
 new MullItem('USB','https://raw.githubusercontent.com/LTUC/amman-201d14/main/class-11/lab/assets/usb.gif' ); 
 new MullItem('WATER-CAN','https://raw.githubusercontent.com/LTUC/amman-201d14/main/class-11/lab/assets/water-can.jpg' ); 
 new MullItem('WINE-GLASS','https://raw.githubusercontent.com/LTUC/amman-201d14/main/class-11/lab/assets/wine-glass.jpg' ); 
-console.log(counterlode);
 getData();
 runder();
+
